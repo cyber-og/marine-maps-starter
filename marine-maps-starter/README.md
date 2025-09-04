@@ -15,24 +15,6 @@ This is a minimal proof of concept intended to demonstrate architecture, styling
 - Style toggles: Day / Night / High Contrast.
 - Clean, static HTML + JS project (no build tools required).
 
----
-
-## Project Structure
-
-
-marine-maps-starter/
-│── index.html              # Main map application
-│── data/
-│   ├── contours.geojson    # Sample contour lines
-│   └── soundings.geojson   # Sample sounding points
-│── assets/
-│   ├── diagram-architecture.svg   # System diagram
-│   └── demo-screenshot.png        # Demo preview
-└── README.md
-
-`
-
----
 
 ##Quick Start
 
