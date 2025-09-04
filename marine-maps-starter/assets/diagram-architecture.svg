@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400">
+<rect x="20" y="20" width="160" height="60" fill="#cce5ff" stroke="#004085"/><text x="30" y="55">Data Sources</text>
+<rect x="220" y="20" width="160" height="60" fill="#d4edda" stroke="#155724"/><text x="230" y="55">Tile Pipeline</text>
+<rect x="420" y="20" width="160" height="60" fill="#f8d7da" stroke="#721c24"/><text x="430" y="55">Frontend</text>
+<line x1="180" y1="50" x2="220" y2="50" stroke="#000"/>
+<line x1="380" y1="50" x2="420" y2="50" stroke="#000"/>
+<text x="40" y="100">EMODnet, NOAA, ENC</text>
+<text x="240" y="100">GDAL, tippecanoe, tiles</text>
+<text x="440" y="100">MapLibre GL JS</text>
+</svg>

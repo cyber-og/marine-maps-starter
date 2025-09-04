@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Marine Map Starter</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+<script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+<style>
+  body { margin: 0; padding: 0; }
+  #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  .menu { position: absolute; background: #fff; padding: 10px; font-family: sans-serif; top: 10px; right: 10px; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="menu">
+  <button onclick="setStyle('day')">Day</button>
+  <button onclick="setStyle('night')">Night</button>
+  <button onclick="setStyle('contrast')">High Contrast</button>
+</div>
+<script>
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'https://demotiles.maplibre.org/style.json',
+  center: [-15.5, 28.5],
+  zoom: 6
+});
+
+map.on('load', () => {
+  map.addSource('contours', {
+    'type': 'geojson',
+    'data': 'data/contours.geojson'
+  });
+  // Contour lines
+map.addLayer({
+  'id': 'contours',
+  'type': 'line',
+  'source': 'contours',
+  'paint': {
+    'line-color': '#0000ff',
+    'line-width': 1
+  }
+});
+
+// Contour labels (new layer)
+map.addLayer({
+  'id': 'contour-labels',
+  'type': 'symbol',
+  'source': 'contours',
+  'layout': {
+    'symbol-placement': 'line',
+    'text-field': ['get', 'depth'],
+    'text-size': 12
+  },
+  'paint': {
+    'text-color': '#000080'
+  }
+});
+  map.addLayer({
+    'id': 'contours-line',
+    'type': 'line',
+    'source': 'contours',
+    'paint': {
+      'line-color': '#0055ff',
+      'line-width': 1
+    }
+  });
+
+  map.addSource('soundings', {
+    'type': 'geojson',
+    'data': 'data/soundings.geojson'
+  });
+  map.addLayer({
+    'id': 'soundings-symbol',
+    'type': 'symbol',
+    'source': 'soundings',
+    'layout': {
+      'text-field': ['get', 'depth'],
+      'text-size': 12
+    },
+    'paint': {
+      'text-color': '#003366'
+    }
+  });
+});
+
+function setStyle(mode) {
+  if(mode === 'day') {
+    map.setPaintProperty('contours-line','line-color','#0055ff');
+    map.setPaintProperty('soundings-symbol','text-color','#003366');
+  }
+  if(mode === 'night') {
+    map.setPaintProperty('contours-line','line-color','#00ffff');
+    map.setPaintProperty('soundings-symbol','text-color','#ffffff');
+  }
+  if(mode === 'contrast') {
+    map.setPaintProperty('contours-line','line-color','#000000');
+    map.setPaintProperty('soundings-symbol','text-color','#ff0000');
+  }
+}
+</script>
+</body>
+</html>
+
+
